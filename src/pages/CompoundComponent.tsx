@@ -18,7 +18,7 @@ const dummyCardData: CardData = {
 
 const CompoundComponent = () => {
   return (
-    <div className="mx-auto container">
+    <div className="mx-auto container p-2">
       <header className="mt-10 sm:mt-0 mb-10">
         <h2 className="font-semibold text-lg">Compound Component</h2>
         <p className="text-muted-foreground">
