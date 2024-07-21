@@ -4,30 +4,32 @@ import { RootState } from "./store";
 
 type ThemeModes = "light" | "dark";
 
-function getInitialTheme(): ThemeModes {
-  if (typeof window !== "undefined" && window.localStorage) {
-    const storedPrefs = window.localStorage.getItem("color-theme");
-    if (typeof storedPrefs === "string") {
-      return storedPrefs as ThemeModes;
-    }
-
-    const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    if (userMedia.matches) {
-      return "dark";
-    }
-  }
-  return "light";
-}
-
-const rawSetTheme = (theme: ThemeModes) => {
+function rawSetTheme(theme: ThemeModes) {
   const root = window.document.documentElement;
   const isDark = theme === "dark";
 
   root.classList.remove(isDark ? "light" : "dark");
   root.classList.add(theme);
-
   localStorage.setItem("color-theme", theme);
-};
+}
+
+function getInitialTheme(): ThemeModes {
+  if (typeof window !== "undefined" && window.localStorage) {
+    const storedPrefs = window.localStorage.getItem("color-theme");
+    if (typeof storedPrefs === "string") {
+      rawSetTheme(storedPrefs as ThemeModes);
+      return storedPrefs as ThemeModes;
+    }
+
+    const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
+    if (userMedia.matches) {
+      rawSetTheme("dark");
+      return "dark";
+    }
+  }
+  rawSetTheme("light");
+  return "light";
+}
 
 // Define a type for the slice state
 interface ThemeState {
