@@ -17,7 +17,7 @@ const Posts = () => {
 
       <div className="mx-auto space-y-4 md:flex md:flex-wrap md:gap-4 md:space-y-0">
         {isLoading ? (
-          <p>Loading</p>
+          <p>{"Loading"}</p>
         ) : data ? (
           data.ids.slice(0, 12).map((postId) => {
             const post = data.entities[postId];
@@ -28,8 +28,6 @@ const Posts = () => {
                   cardId: String(post.id),
                   title: post.title,
                   content: post.body,
-                  cardImgURL: "",
-                  footerContent: "",
                 }}
                 className="border border-border"
               >
@@ -39,9 +37,9 @@ const Posts = () => {
             );
           })
         ) : error ? (
-          "Uh oh! Something went wrong 🥲"
+          <p>{"Uh oh! Something went wrong 🥲"}</p>
         ) : (
-          "Nothing to show 🥲"
+          <p>{"Nothing to show 🥲"}</p>
         )}
       </div>
     </div>

@@ -4,9 +4,9 @@ import { cn } from "../utils/cn";
 interface CardData {
   cardId: string;
   title: string;
-  cardImgURL: string;
   content: string;
-  footerContent: string;
+  cardImgURL?: string;
+  footerContent?: string;
 }
 
 interface CardProps extends ComponentProps<"figure"> {
@@ -15,7 +15,7 @@ interface CardProps extends ComponentProps<"figure"> {
 
 const CardCtx = createContext<{ cardData: CardData }>({
   cardData: {
-    cardId: "1",
+    cardId: "",
     title: "",
     cardImgURL: "",
     content: "",
