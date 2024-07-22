@@ -49,7 +49,7 @@ const Header = () => {
             >
               <img
                 className="w-8 h-8 rounded-full"
-                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                src="https://images.unsplash.com/photo-1702478492816-843fb767d0f1?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="user"
               />
             </button>

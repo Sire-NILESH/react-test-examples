@@ -26,7 +26,7 @@ const CompoundComponent = () => {
         </p>
       </header>
 
-      <div className="mx-auto space-y-4  md:flex md:space-x-4 md:space-y-0">
+      <div className="mx-auto space-y-4 md:flex md:space-x-4 md:space-y-0">
         <Card cardData={dummyCardData} className="border border-border">
           <Card.Title />
           <Card.Content />

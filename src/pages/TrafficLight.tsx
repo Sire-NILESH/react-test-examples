@@ -23,7 +23,7 @@ const trafficStates: TrafficState[] = [
   // {
   //   light: "orange",
   //   colorHex: "#ea580c",
-  //   time: 2000,
+  //   time: 500,
   // },
   {
     light: "green",
@@ -46,7 +46,18 @@ const TrafficLight = () => {
   }, [current]);
 
   return (
-    <div className="h-screen flex items-start justify-center">
+    <div className="mx-auto container p-2">
+      <header className="mt-10 sm:mt-0 mb-10">
+        <h2 className="font-semibold text-lg">Traffic light</h2>
+        <p className="text-muted-foreground max-w-lg">
+          A demonstration of a traffic light component that changes light
+          signals as{" "}
+          {trafficStates
+            .map((state) => `${state.light} for ${state.time} ms`)
+            .join(", ")}
+        </p>
+      </header>
+
       <figure className="mt-24 w-36 p-4 bg-black text-white border border-1 border-border rounded-lg space-y-4 text-center">
         <h4 className="text-sm uppercase">Traffic Light</h4>
 

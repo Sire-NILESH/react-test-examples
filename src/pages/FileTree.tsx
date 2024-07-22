@@ -166,9 +166,9 @@ const FileSystemItem = ({ node, className, ...props }: FileSystemItemProps) => {
         {node.type === "folder" ? (
           <Folder className="text-yellow-500 size-5" />
         ) : node.type === "file" ? (
-          <File className="text-primary size-5" />
+          <File className="text-primary size-5 ml-1" />
         ) : (
-          <FileQuestion className="text-primary size-5" />
+          <FileQuestion className="text-primary size-5 ml-1" />
         )}
 
         <span>{node.name}</span>

@@ -5,7 +5,16 @@ const Counter = () => {
   // solving the unnecessary re-rendering by memoising the function that will be passed to the child component
   const fn = React.useCallback(() => {}, []);
   return (
-    <div className="space-y-4 mt-10 sm:mt-0">
+    <div className="space-y-4 mx-auto container p-2">
+      <header className="mt-10 sm:mt-0 mb-10">
+        <h2 className="font-semibold text-lg">Counter and performance</h2>
+        <p className="text-muted-foreground">
+          The card is a child component of the counter component takes takes a
+          function as a prop. <br />
+          Make sure that it does not re render on every counter change.
+        </p>
+      </header>
+
       <div className="flex items-center space-x-4">
         <p className="border-b border-border px-2 py-1">Counter {counter}</p>
         <button

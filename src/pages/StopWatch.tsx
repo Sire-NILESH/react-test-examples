@@ -11,10 +11,15 @@ const StopWatch = () => {
     if (state !== stopWatchState) setStopWatchState(state);
   }
   return (
-    <div className="h-screen space-y-5">
-      <h2 className="text-normal text-center uppercase">Stop watch</h2>
+    <div className="mx-auto container p-2">
+      <header className="mt-10 sm:mt-0 mb-10">
+        <h2 className="font-semibold text-lg">Stop Watch</h2>
+        <p className="text-muted-foreground">
+          A demonstration of a stop watch component
+        </p>
+      </header>
 
-      <div className="mx-auto max-w-md flex flex-col items-center bg-secondary p-4 rounded-md">
+      <div className="max-w-md flex flex-col items-center bg-secondary p-4 rounded-md">
         <Watch stopWatchState={stopWatchState} />
         <Actions
           stopWatchState={stopWatchState}

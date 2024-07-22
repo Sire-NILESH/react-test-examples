@@ -20,8 +20,13 @@ const Slider = () => {
   };
 
   return (
-    <div className="h-screen space-y-5">
-      <h2 className="text-normal text-center uppercase">Slider</h2>
+    <div className="mx-auto container p-2">
+      <header className="mt-10 sm:mt-0 mb-10">
+        <h2 className="font-semibold text-lg">Slider component</h2>
+        <p className="text-muted-foreground">
+          A demonstration of a slider component.
+        </p>
+      </header>
 
       <div className="relative">
         <div
