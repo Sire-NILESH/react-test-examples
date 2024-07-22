@@ -1,6 +1,5 @@
 import {
   StickyNote,
-  Users,
   LogIn,
   LogOut,
   TrafficCone,
@@ -8,6 +7,8 @@ import {
   GalleryHorizontal,
   Pointer,
   Atom,
+  ArrowDown01,
+  FolderTree,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -17,16 +18,18 @@ interface IconProps {
 
 export const sidebarItems = [
   {
+    name: "Counter",
+    href: "/counter",
+    icon: ({ className }: IconProps) => (
+      <ArrowDown01 className={cn(className)} />
+    ),
+  },
+  {
     name: "Posts",
     href: "/posts",
     icon: ({ className }: IconProps) => (
       <StickyNote className={cn(className)} />
     ),
-  },
-  {
-    name: "Users",
-    href: "/users",
-    icon: ({ className }: IconProps) => <Users className={cn(className)} />,
   },
   {
     name: "Traffic Light",
@@ -45,6 +48,13 @@ export const sidebarItems = [
     href: "/slider",
     icon: ({ className }: IconProps) => (
       <GalleryHorizontal className={cn(className)} />
+    ),
+  },
+  {
+    name: "File Tree",
+    href: "/file-tree",
+    icon: ({ className }: IconProps) => (
+      <FolderTree className={cn(className)} />
     ),
   },
   {

@@ -3,8 +3,8 @@ import { cn } from "../utils/cn";
 
 interface CardData {
   cardId: string;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
   cardImgURL?: string;
   footerContent?: string;
 }
