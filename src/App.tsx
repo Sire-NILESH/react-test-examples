@@ -7,16 +7,17 @@ import withSuspense from "./components/withSuspense";
 const Posts = withSuspense(lazy(() => import("./pages/Posts")));
 const Counter = withSuspense(lazy(() => import("./pages/Counter")));
 const Pointer = withSuspense(lazy(() => import("./pages/Pointer")));
-const CompoundComponent = withSuspense(
-  lazy(() => import("./pages/CompoundComponent"))
-);
 const TrafficLight = withSuspense(lazy(() => import("./pages/TrafficLight")));
 const Slider = withSuspense(lazy(() => import("./pages/Slider")));
 const FileTree = withSuspense(lazy(() => import("./pages/FileTree")));
 const StopWatch = withSuspense(lazy(() => import("./pages/StopWatch")));
 const NotFound = withSuspense(lazy(() => import("./pages/NotFound")));
+const Typist = withSuspense(lazy(() => import("./pages/Typist")));
 const Signin = withSuspense(lazy(() => import("./pages/Signin")));
 const Signout = withSuspense(lazy(() => import("./pages/Signout")));
+const CompoundComponent = withSuspense(
+  lazy(() => import("./pages/CompoundComponent"))
+);
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/file-tree" element={<FileTree />} />
             <Route path="/pointer" element={<Pointer />} />
             <Route path="/compound-component" element={<CompoundComponent />} />
+            <Route path="/typist" element={<Typist />} />
             <Route path="/sign-in" element={<Signin />} />
             <Route path="/sign-out" element={<Signout />} />
             <Route path="*" element={<NotFound />} />

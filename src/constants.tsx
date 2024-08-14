@@ -9,6 +9,7 @@ import {
   Atom,
   ArrowDown01,
   FolderTree,
+  Keyboard,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -66,6 +67,11 @@ export const sidebarItems = [
     name: "Compound Component",
     href: "/compound-component",
     icon: ({ className }: IconProps) => <Atom className={cn(className)} />,
+  },
+  {
+    name: "Typist",
+    href: "/typist",
+    icon: ({ className }: IconProps) => <Keyboard className={cn(className)} />,
   },
   {
     name: "Sign in",

@@ -5,7 +5,10 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import { selectMobileNav } from "../store/mobileNavSlice";
 import { cn } from "../utils/cn";
 
-const Sidebar = ({ className }: ComponentPropsWithoutRef<"aside">) => {
+const Sidebar = ({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"aside">) => {
   const { status } = useAppSelector(selectMobileNav);
   return (
     <aside
@@ -15,6 +18,7 @@ const Sidebar = ({ className }: ComponentPropsWithoutRef<"aside">) => {
         !status ? "-translate-x-full" : ""
       )}
       aria-label="Sidebar"
+      {...props}
     >
       <NavContents />
     </aside>

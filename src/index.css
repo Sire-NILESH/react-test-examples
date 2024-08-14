@@ -62,3 +62,16 @@ code {
     --ring: 224.3 76.3% 48%;
   }
 }
+
+.incorrect-letter {
+  @apply text-red-500;
+}
+
+.current-letter {
+  @apply underline;
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 18px;
+}

@@ -66,7 +66,7 @@ const Card = ({ className, cardData, children, ...props }: CardProps) => {
     <CardCtx.Provider value={{ cardData }}>
       <div
         className={cn(
-          "w-96 rounded-md bg-card text-card-foreground p-4 space-y-3 overflow-hidden",
+          "max-w-96 w-full rounded-md bg-card text-card-foreground p-4 space-y-3 overflow-hidden",
           className
         )}
         {...props}
