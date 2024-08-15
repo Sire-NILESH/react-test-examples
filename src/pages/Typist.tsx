@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { ListRestart } from "lucide-react";
+import React, { useRef, useState } from "react";
+import Button from "../components/Button";
 import { wordBank } from "../dummyData/wordbank";
 import { cn } from "../utils/cn";
-import Button from "../components/Button";
-import { ListRestart } from "lucide-react";
 
 function getRandomWord() {
   return wordBank[Math.floor(Math.random() * wordBank.length - 1)];
@@ -13,15 +13,15 @@ function generateRandomWordBank(wordLength: number = 40) {
   for (let i = 0; i < wordLength; i++) {
     randomWordBank.push(getRandomWord());
   }
-  //   return randomWordBank.join(" ");
+
   return randomWordBank;
 }
 
-type IncorrectLettersType = {
+interface IncorrectLettersType {
   [wordIndex: number]: {
     [letterIndex: number]: boolean;
   };
-};
+}
 
 const Typist = () => {
   const [words, setWords] = useState(generateRandomWordBank());
@@ -41,16 +41,33 @@ const Typist = () => {
     const currentWord = words[currentWordIndex];
     const currentLetter = currentWord[currentLetterIndex];
 
-    if (input.endsWith(" ")) {
+    if (input.endsWith(" ") || input.length > currentWord.length) {
       // End of word
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentLetterIndex(0);
       setUserInput("");
 
+      // when user skips the word by pressing space, mark the skipped letters into incorrect state
+      if (currentLetterIndex < currentWord.length) {
+        for (let i = currentLetterIndex; i < currentWord.length; i++) {
+          // Mark the letter as incorrect in the incorrectLetters state
+          setIncorrectLetters((prev) => {
+            return {
+              ...prev,
+              [currentWordIndex]: {
+                ...prev[currentWordIndex],
+                [i]: true,
+              },
+            };
+          });
+        }
+      }
+
       //end of sentence
       if (currentWordIndex === words.length - 1) {
         setWords(generateRandomWordBank());
         setCurrentWordIndex(0);
+        setIncorrectLetters({});
       }
     } else if (input.length <= currentLetterIndex + 1) {
       // Check if the letter is correct
@@ -78,6 +95,7 @@ const Typist = () => {
     0
   );
 
+  // Calculate total incorrect words
   const totalIncorrectWords = Object.values(incorrectLetters).flat().length;
 
   return (
@@ -126,7 +144,6 @@ const Typist = () => {
             })}
             <span
               className={cn(
-                // "inline-block",
                 currentWordIndex === wordIndex &&
                   currentLetterIndex === words[currentWordIndex].length
                   ? "underline"
@@ -157,8 +174,8 @@ const Typist = () => {
           className="w-auto py-2"
           onClick={() => setWords(generateRandomWordBank())}
         >
-          <ListRestart className="size-4 mr-2" />
-          <span>Reset</span>
+          <ListRestart className="size-5 mr-2" />
+          <span className="text-lg">Reset</span>
         </Button>
       </div>
 
