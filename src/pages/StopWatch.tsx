@@ -1,6 +1,13 @@
-import { ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
-import { cn } from "../utils/cn";
 import { CirclePause, CirclePlay, TimerReset } from "lucide-react";
+import { ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
+import { cn } from "../utils/cn";
 
 type StopWatchState = "play" | "pause" | "reset";
 
@@ -11,22 +18,24 @@ const StopWatch = () => {
     if (state !== stopWatchState) setStopWatchState(state);
   }
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">Stop Watch</h2>
-        <p className="text-muted-foreground">
+    <Page>
+      <PageHeader>
+        <PageTitle>Stop Watch</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
           A demonstration of a stop watch component
-        </p>
-      </header>
+        </PageDescription>
+      </PageHeader>
 
-      <div className="max-w-md flex flex-col items-center bg-secondary p-4 rounded-md">
-        <Watch stopWatchState={stopWatchState} />
-        <Actions
-          stopWatchState={stopWatchState}
-          stopWatchStateHandler={stopWatchStateHandler}
-        />
-      </div>
-    </div>
+      <PageBody>
+        <div className="max-w-md flex flex-col items-center bg-secondary p-4 rounded-md">
+          <Watch stopWatchState={stopWatchState} />
+          <Actions
+            stopWatchState={stopWatchState}
+            stopWatchStateHandler={stopWatchStateHandler}
+          />
+        </div>
+      </PageBody>
+    </Page>
   );
 };
 

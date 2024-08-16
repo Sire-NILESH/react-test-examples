@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
 import { cn } from "../utils/cn";
 
 type LightState = "red" | "green" | "yellow" | "orange";
@@ -46,40 +53,42 @@ const TrafficLight = () => {
   }, [current]);
 
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">Traffic light</h2>
-        <p className="text-muted-foreground max-w-lg">
+    <Page>
+      <PageHeader>
+        <PageTitle>Traffic light</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
           A demonstration of a traffic light component that changes light
           signals as{" "}
           {trafficStates
             .map((state) => `${state.light} for ${state.time} ms`)
             .join(", ")}
-        </p>
-      </header>
+        </PageDescription>
+      </PageHeader>
 
-      <figure className="mt-24 w-36 p-4 bg-black text-white border border-1 border-border rounded-lg space-y-4 text-center">
-        <h4 className="text-sm uppercase">Traffic Light</h4>
+      <PageBody>
+        <figure className="w-36 p-4 bg-black text-white border border-1 border-border rounded-lg space-y-4 text-center">
+          <h4 className="text-sm uppercase">Traffic Light</h4>
 
-        <div className="flex flex-col items-center space-y-4">
-          {trafficStates.map((trafficState, i) => (
-            <TrafficLightBulb
-              key={i}
-              style={{
-                backgroundColor:
-                  trafficStates[current].light === trafficState.light
-                    ? trafficState.colorHex
-                    : "transparent",
-                borderColor:
-                  trafficStates[current].light === trafficState.light
-                    ? trafficState.colorHex
-                    : undefined,
-              }}
-            />
-          ))}
-        </div>
-      </figure>
-    </div>
+          <div className="flex flex-col items-center space-y-4">
+            {trafficStates.map((trafficState, i) => (
+              <TrafficLightBulb
+                key={i}
+                style={{
+                  backgroundColor:
+                    trafficStates[current].light === trafficState.light
+                      ? trafficState.colorHex
+                      : "transparent",
+                  borderColor:
+                    trafficStates[current].light === trafficState.light
+                      ? trafficState.colorHex
+                      : undefined,
+                }}
+              />
+            ))}
+          </div>
+        </figure>
+      </PageBody>
+    </Page>
   );
 };
 

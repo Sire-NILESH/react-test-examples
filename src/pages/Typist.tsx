@@ -1,6 +1,13 @@
 import { ListRestart } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Button from "../components/Button";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
 import { wordBank } from "../dummyData/wordbank";
 import { cn } from "../utils/cn";
 
@@ -34,6 +41,14 @@ const Typist = () => {
   const [incorrectLetters, setIncorrectLetters] =
     useState<IncorrectLettersType>({});
 
+  function resetGame() {
+    setWords(generateRandomWordBank());
+    setCurrentWordIndex(0);
+    setCurrentLetterIndex(0);
+    setIncorrectLetters({});
+    setUserInput("");
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.toLowerCase();
     setUserInput(input);
@@ -65,15 +80,11 @@ const Typist = () => {
 
       //end of sentence
       if (currentWordIndex === words.length - 1) {
-        setWords(generateRandomWordBank());
-        setCurrentWordIndex(0);
-        setIncorrectLetters({});
+        resetGame();
       }
     } else if (input.length <= currentLetterIndex + 1) {
       // Check if the letter is correct
       if (input[currentLetterIndex] !== currentLetter) {
-        // setIncorrectLetters((prev) => prev + 1);
-
         // Mark the letter as incorrect in the incorrectLetters state
         setIncorrectLetters((prev) => {
           return {
@@ -89,102 +100,105 @@ const Typist = () => {
     }
   };
 
-  // Calculate total incorrect letters
-  const totalIncorrectLetters = Object.values(incorrectLetters).reduce(
-    (acc, letters) => acc + Object.keys(letters).length,
-    0
-  );
+  // Memoize total incorrect letters calculation
+  const totalIncorrectLetters = useMemo(() => {
+    return Object.values(incorrectLetters).reduce(
+      (acc, letters) => acc + Object.keys(letters).length,
+      0
+    );
+  }, [incorrectLetters]);
 
-  // Calculate total incorrect words
-  const totalIncorrectWords = Object.values(incorrectLetters).flat().length;
+  // Memoize total incorrect words calculation
+  const totalIncorrectWords = useMemo(() => {
+    return Object.keys(incorrectLetters).length;
+  }, [incorrectLetters]);
 
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">Typist</h2>
-        <p className="text-muted-foreground max-w-lg">
+    <Page>
+      <PageHeader>
+        <PageTitle>Typist</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
           A small copy of the 'monkey type' app to check your typing.
-        </p>
-      </header>
+        </PageDescription>
+      </PageHeader>
 
-      <div className="max-w-lg rounded-md border border-border p-4 font-mono font-bold text-lg text-muted-foreground">
-        {/* WORD */}
-        {words.map((word, wordIndex) => (
-          <span
-            key={wordIndex}
-            className={cn(
-              "inline-block",
-              currentWordIndex > wordIndex ? "text-foreground" : ""
-            )}
-          >
-            {/* LETTER */}
-            {word.split("").map((letter, letterIndex) => {
-              const isCurrentLetter =
-                wordIndex === currentWordIndex &&
-                letterIndex === currentLetterIndex;
-
-              const isIncorrectLetter =
-                incorrectLetters[wordIndex]?.[letterIndex];
-
-              return (
-                <span
-                  key={wordIndex + "-" + letterIndex}
-                  className={cn(
-                    isCurrentLetter ? "current-letter" : "",
-                    isIncorrectLetter ? "incorrect-letter" : "",
-                    currentLetterIndex > letterIndex &&
-                      currentWordIndex === wordIndex
-                      ? "text-foreground"
-                      : ""
-                  )}
-                >
-                  {letter}
-                </span>
-              );
-            })}
+      <PageBody>
+        <div className="max-w-lg rounded-md border border-border p-4 font-mono font-bold text-lg text-muted-foreground">
+          {/* WORD */}
+          {words.map((word, wordIndex) => (
             <span
+              key={wordIndex}
               className={cn(
-                currentWordIndex === wordIndex &&
-                  currentLetterIndex === words[currentWordIndex].length
-                  ? "underline"
-                  : ""
+                "inline-block",
+                currentWordIndex > wordIndex ? "text-foreground" : ""
               )}
             >
-              {"\u00A0"}
+              {/* LETTER */}
+              {word.split("").map((letter, letterIndex) => {
+                const isCurrentLetter =
+                  wordIndex === currentWordIndex &&
+                  letterIndex === currentLetterIndex;
+
+                const isIncorrectLetter =
+                  incorrectLetters[wordIndex]?.[letterIndex];
+
+                return (
+                  <span
+                    key={wordIndex + "-" + letterIndex}
+                    className={cn(
+                      isCurrentLetter ? "current-letter" : "",
+                      isIncorrectLetter ? "incorrect-letter" : "",
+                      currentLetterIndex > letterIndex &&
+                        currentWordIndex === wordIndex
+                        ? "text-foreground"
+                        : ""
+                    )}
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
+              <span
+                className={cn(
+                  currentWordIndex === wordIndex &&
+                    currentLetterIndex === words[currentWordIndex].length
+                    ? "underline"
+                    : ""
+                )}
+              >
+                {"\u00A0"}
+              </span>
             </span>
-          </span>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="max-w-lg mt-10 flex flex-col md:flex-row md:items-center gap-4">
-        <input
-          type="text"
-          value={userInput}
-          onChange={handleInputChange}
-          // autoFocus
-          placeholder={
-            currentWordIndex > 0 || currentLetterIndex > 0
-              ? undefined
-              : "start typing..."
-          }
-          className="w-full px-4 py-2 border border-border rounded-full bg-secondary"
-        />
+        <div className="max-w-lg mt-10 flex flex-col md:flex-row md:items-center gap-4">
+          <input
+            type="text"
+            value={userInput}
+            onChange={handleInputChange}
+            // autoFocus
+            placeholder={
+              currentWordIndex > 0 || currentLetterIndex > 0
+                ? undefined
+                : "start typing..."
+            }
+            className="w-full px-4 py-2 border border-border rounded-full bg-secondary"
+          />
 
-        <Button
-          className="w-auto py-2"
-          onClick={() => setWords(generateRandomWordBank())}
-        >
-          <ListRestart className="size-5 mr-2" />
-          <span className="text-lg">Reset</span>
-        </Button>
-      </div>
+          <Button className="w-auto py-2" onClick={resetGame}>
+            <ListRestart className="size-5 mr-2" />
+            <span className="text-lg">Reset</span>
+          </Button>
+        </div>
 
-      <div className="mt-6">
-        <p className="font-bold uppercase tracking-wide">Mistakes</p>
-        <p>Letters: {totalIncorrectLetters}</p>
-        <p>Words: {totalIncorrectWords}</p>
-      </div>
-    </div>
+        <div className="mt-6">
+          <p className="font-bold uppercase tracking-wide">Mistakes</p>
+          <p>Letters: {totalIncorrectLetters}</p>
+          <p>Words: {totalIncorrectWords}</p>
+        </div>
+      </PageBody>
+    </Page>
   );
 };
 

@@ -1,6 +1,13 @@
 import { ComponentPropsWithoutRef, useRef } from "react";
 import { cn } from "../utils/cn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
 
 type SlideDirection = "left" | "right";
 
@@ -20,44 +27,46 @@ const Slider = () => {
   };
 
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">Slider component</h2>
-        <p className="text-muted-foreground">
+    <Page>
+      <PageHeader>
+        <PageTitle>Slider component</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
           A demonstration of a slider component.
-        </p>
-      </header>
+        </PageDescription>
+      </PageHeader>
 
-      <div className="relative">
-        <div
-          ref={sliderRef}
-          className="mx-10 h-56 flex items-center space-x-4 overflow-x-auto bg-secondary p-4 rounded-md"
-        >
-          <ChevronButton
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
-            onClick={() => handleSlider("left")}
+      <PageBody>
+        <div className="relative">
+          <div
+            ref={sliderRef}
+            className="mx-10 h-56 flex items-center space-x-4 overflow-x-auto bg-secondary p-4 rounded-md"
           >
-            <ChevronLeft className="size-8" />
-          </ChevronButton>
-
-          {Array.from({ length: 30 }).map((_item, i) => (
-            <figure
-              key={i}
-              className="min-w-36 h-full bg-white flex items-center justify-center rounded-lg text-black"
+            <ChevronButton
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
+              onClick={() => handleSlider("left")}
             >
-              {i + 1}
-            </figure>
-          ))}
+              <ChevronLeft className="size-8" />
+            </ChevronButton>
 
-          <ChevronButton
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
-            onClick={() => handleSlider("right")}
-          >
-            <ChevronRight className="size-8" />
-          </ChevronButton>
+            {Array.from({ length: 30 }).map((_item, i) => (
+              <figure
+                key={i}
+                className="min-w-36 h-full bg-white flex items-center justify-center rounded-lg text-black"
+              >
+                {i + 1}
+              </figure>
+            ))}
+
+            <ChevronButton
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
+              onClick={() => handleSlider("right")}
+            >
+              <ChevronRight className="size-8" />
+            </ChevronButton>
+          </div>
         </div>
-      </div>
-    </div>
+      </PageBody>
+    </Page>
   );
 };
 

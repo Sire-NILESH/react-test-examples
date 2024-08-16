@@ -1,10 +1,31 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
 
 const NotFound = () => {
   return (
-    <div>
-      <p>There's nothing here: 404!</p>
-    </div>
+    <Page>
+      <PageHeader>
+        <PageTitle>404 Not Found</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
+          The Page you were looking for does not exist 😭.
+        </PageDescription>
+      </PageHeader>
+
+      <PageBody>
+        <Link to={"/"}>
+          <Button variant={"default"}>
+            <p>Take me Home</p>
+          </Button>
+        </Link>
+      </PageBody>
+    </Page>
   );
 };
 

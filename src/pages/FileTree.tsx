@@ -1,6 +1,13 @@
-import React, { ComponentProps, useState } from "react";
-import { cn } from "../utils/cn";
 import { ChevronRight, File, FileQuestion, Folder } from "lucide-react";
+import { ComponentProps, useState } from "react";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
+import { cn } from "../utils/cn";
 
 type NodeType = "file" | "folder";
 
@@ -121,24 +128,26 @@ const dummyFileSystem: Node[] = [
 
 const FileTree = () => {
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">File Tree</h2>
-        <p className="text-muted-foreground">
+    <Page>
+      <PageHeader>
+        <PageTitle>File Tree</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
           A demonstration of file tree using recursion
-        </p>
-      </header>
+        </PageDescription>
+      </PageHeader>
 
-      <div className="mx-auto space-y-4 md:flex md:space-x-4 md:space-y-0">
-        <ul>
-          {dummyFileSystem.map((node, i) => (
-            <li key={node.name + "-" + i}>
-              <FileSystemItem node={node} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      <PageBody>
+        <div className="mx-auto space-y-4 md:flex md:space-x-4 md:space-y-0">
+          <ul>
+            {dummyFileSystem.map((node, i) => (
+              <li key={node.name + "-" + i}>
+                <FileSystemItem node={node} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </PageBody>
+    </Page>
   );
 };
 

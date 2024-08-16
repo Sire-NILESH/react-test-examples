@@ -1,4 +1,11 @@
 import { ComponentProps, createContext, useContext } from "react";
+import {
+  Page,
+  PageBody,
+  PageDescription,
+  PageHeader,
+  PageTitle,
+} from "../components/Page";
 import { cn } from "../utils/cn";
 
 interface CardData {
@@ -18,31 +25,33 @@ const dummyCardData: CardData = {
 
 const CompoundComponent = () => {
   return (
-    <div className="mx-auto container p-2">
-      <header className="mt-10 sm:mt-0 mb-10">
-        <h2 className="font-semibold text-lg">Compound Component</h2>
-        <p className="text-muted-foreground">
-          A demonstration of card built using Compound Component pattern
-        </p>
-      </header>
+    <Page>
+      <PageHeader>
+        <PageTitle>Compound Component</PageTitle>
+        <PageDescription className="text-muted-foreground max-w-lg">
+          Compound Component
+        </PageDescription>
+      </PageHeader>
 
-      <div className="mx-auto space-y-4 md:flex md:space-x-4 md:space-y-0">
-        <Card cardData={dummyCardData} className="border border-border">
-          <Card.Title />
-          <Card.Content />
-          <Card.Image className="rounded-md overflow-hidden" />
-          <Card.Footer />
-        </Card>
-
-        <Card cardData={dummyCardData} className="p-0 border border-border">
-          <Card.Image />
-          <div className="p-3">
+      <PageBody>
+        <div className="mx-auto space-y-4 md:flex md:space-x-4 md:space-y-0">
+          <Card cardData={dummyCardData} className="border border-border">
             <Card.Title />
             <Card.Content />
-          </div>
-        </Card>
-      </div>
-    </div>
+            <Card.Image className="rounded-md overflow-hidden" />
+            <Card.Footer />
+          </Card>
+
+          <Card cardData={dummyCardData} className="p-0 border border-border">
+            <Card.Image />
+            <div className="p-3">
+              <Card.Title />
+              <Card.Content />
+            </div>
+          </Card>
+        </div>
+      </PageBody>
+    </Page>
   );
 };
 
