@@ -30,21 +30,19 @@ PageHeader.displayName = "PageHeader";
 interface PageTitleProps extends ComponentProps<"h2"> {}
 
 const PageTitle = forwardRef<HTMLHeadingElement, PageTitleProps>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("font-semibold text-lg", className)}
-      {...props}
-    />
+  ({ className, children, ...props }, ref) => (
+    <h2 ref={ref} className={cn("font-semibold text-lg", className)} {...props}>
+      {children}
+    </h2>
   )
 );
 PageTitle.displayName = "PageTitle";
 
 interface PageDescriptionProps extends ComponentProps<"p"> {}
 
-const PageDescription = forwardRef<HTMLHeadingElement, PageDescriptionProps>(
+const PageDescription = forwardRef<HTMLParagraphElement, PageDescriptionProps>(
   ({ className, ...props }, ref) => (
-    <div
+    <p
       ref={ref}
       className={cn("text-muted-foreground max-w-lg", className)}
       {...props}
