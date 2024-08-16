@@ -13,7 +13,7 @@ const NotFound = () => {
     <Page>
       <PageHeader>
         <PageTitle>404 Not Found</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           The Page you were looking for does not exist 😭.
         </PageDescription>
       </PageHeader>

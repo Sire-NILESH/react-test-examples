@@ -56,7 +56,7 @@ const TrafficLight = () => {
     <Page>
       <PageHeader>
         <PageTitle>Traffic light</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A demonstration of a traffic light component that changes light
           signals as{" "}
           {trafficStates

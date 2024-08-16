@@ -11,7 +11,7 @@ const Signin = () => {
     <Page>
       <PageHeader>
         <PageTitle>Signin</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem fuga.
         </PageDescription>
       </PageHeader>

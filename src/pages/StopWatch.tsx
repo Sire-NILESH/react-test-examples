@@ -21,7 +21,7 @@ const StopWatch = () => {
     <Page>
       <PageHeader>
         <PageTitle>Stop Watch</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A demonstration of a stop watch component
         </PageDescription>
       </PageHeader>

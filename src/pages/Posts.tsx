@@ -15,7 +15,7 @@ const Posts = () => {
     <Page>
       <PageHeader>
         <PageTitle>RTK Query</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A demonstration of posts fetched using RTK query and cards built using
           Compound Component pattern.
         </PageDescription>

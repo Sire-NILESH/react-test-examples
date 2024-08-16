@@ -117,7 +117,7 @@ const Typist = () => {
     <Page>
       <PageHeader>
         <PageTitle>Typist</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A small copy of the 'monkey type' app to check your typing.
         </PageDescription>
       </PageHeader>

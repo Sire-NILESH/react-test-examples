@@ -16,7 +16,7 @@ const Counter = () => {
     <Page>
       <PageHeader>
         <PageTitle>Counter and performance</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           The card is a child component of the counter component takes takes a
           function as a prop. <br />
           Make sure that it does not re render on every counter change.

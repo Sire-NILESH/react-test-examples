@@ -11,7 +11,7 @@ const Pointer = () => {
     <Page>
       <PageHeader>
         <PageTitle>Pointer</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem fuga.
         </PageDescription>
       </PageHeader>

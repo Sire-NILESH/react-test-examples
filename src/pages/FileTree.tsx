@@ -131,7 +131,7 @@ const FileTree = () => {
     <Page>
       <PageHeader>
         <PageTitle>File Tree</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A demonstration of file tree using recursion
         </PageDescription>
       </PageHeader>

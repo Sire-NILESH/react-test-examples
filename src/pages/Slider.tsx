@@ -30,7 +30,7 @@ const Slider = () => {
     <Page>
       <PageHeader>
         <PageTitle>Slider component</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
+        <PageDescription>
           A demonstration of a slider component.
         </PageDescription>
       </PageHeader>

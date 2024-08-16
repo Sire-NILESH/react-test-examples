@@ -28,9 +28,7 @@ const CompoundComponent = () => {
     <Page>
       <PageHeader>
         <PageTitle>Compound Component</PageTitle>
-        <PageDescription className="text-muted-foreground max-w-lg">
-          Compound Component
-        </PageDescription>
+        <PageDescription>Compound Component</PageDescription>
       </PageHeader>
 
       <PageBody>
