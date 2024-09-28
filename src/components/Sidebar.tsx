@@ -4,16 +4,18 @@ import { sidebarItems } from "../constants";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { selectMobileNav } from "../store/mobileNavSlice";
 import { cn } from "../utils/cn";
+import { authUserSelector } from "../store/authSlice";
 
 const Sidebar = ({
   className,
   ...props
 }: ComponentPropsWithoutRef<"aside">) => {
   const { status } = useAppSelector(selectMobileNav);
+  const user = useAppSelector(authUserSelector);
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-card border-r sm:translate-x-0 dark:border-gray-700",
+        "flex flex-col fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-card border-r sm:translate-x-0 dark:border-gray-700",
         className,
         !status ? "-translate-x-full" : ""
       )}
@@ -21,6 +23,11 @@ const Sidebar = ({
       {...props}
     >
       <NavContents />
+
+      <footer className="p-3 overflow-auto">
+        <p>{user?.role}</p>
+        <p className="">{user?.email}</p>
+      </footer>
     </aside>
   );
 };
@@ -47,7 +54,7 @@ const NavItemLink = ({ className, to, children }: NavItemLinkProps) => {
 const NavContents = () => {
   const location = useLocation();
   return (
-    <div className="h-full px-3 pb-4 overflow-y-auto">
+    <div className="flex-1 px-3 pb-4 overflow-y-auto">
       <ul className="space-y-2 font-medium">
         {sidebarItems.map((item) => {
           return (

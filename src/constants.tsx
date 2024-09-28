@@ -10,6 +10,8 @@ import {
   ArrowDown01,
   FolderTree,
   Keyboard,
+  ListTodo,
+  Cog,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -31,6 +33,11 @@ export const sidebarItems = [
     icon: ({ className }: IconProps) => (
       <StickyNote className={cn(className)} />
     ),
+  },
+  {
+    name: "Todos",
+    href: "/todos",
+    icon: ({ className }: IconProps) => <ListTodo className={cn(className)} />,
   },
   {
     name: "Traffic Light",
@@ -74,13 +81,18 @@ export const sidebarItems = [
     icon: ({ className }: IconProps) => <Keyboard className={cn(className)} />,
   },
   {
-    name: "Sign in",
-    href: "/sign-in",
+    name: "Admin Page",
+    href: "/secret-page",
+    icon: ({ className }: IconProps) => <Cog className={cn(className)} />,
+  },
+  {
+    name: "Login",
+    href: "/login",
     icon: ({ className }: IconProps) => <LogIn className={cn(className)} />,
   },
   {
-    name: "Sign out",
-    href: "/sign-out",
+    name: "Logout",
+    href: "/logout",
     icon: ({ className }: IconProps) => <LogOut className={cn(className)} />,
   },
 ];

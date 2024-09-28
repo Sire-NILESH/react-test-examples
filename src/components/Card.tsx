@@ -46,8 +46,8 @@ const CardTitle = ({ className, ...props }: CardTitleProps) => {
     cardData: { title },
   } = useContext(CardCtx);
   return (
-    <header className={cn("", className)} {...props}>
-      <h2 className="font-bold text-lg">{title}</h2>
+    <header className={cn("font-bold text-lg", className)} {...props}>
+      <h2>{title}</h2>
     </header>
   );
 };

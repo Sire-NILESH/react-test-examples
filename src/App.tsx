@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import DashboardLayout from "./components/DashboardLayout";
 import withSuspense from "./components/withSuspense";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Posts = withSuspense(lazy(() => import("./pages/Posts")));
+const Todos = withSuspense(lazy(() => import("./pages/Todos")));
 const Counter = withSuspense(lazy(() => import("./pages/Counter")));
 const Pointer = withSuspense(lazy(() => import("./pages/Pointer")));
 const TrafficLight = withSuspense(lazy(() => import("./pages/TrafficLight")));
@@ -13,10 +15,17 @@ const FileTree = withSuspense(lazy(() => import("./pages/FileTree")));
 const StopWatch = withSuspense(lazy(() => import("./pages/StopWatch")));
 const NotFound = withSuspense(lazy(() => import("./pages/NotFound")));
 const Typist = withSuspense(lazy(() => import("./pages/Typist")));
-const Signin = withSuspense(lazy(() => import("./pages/Signin")));
-const Signout = withSuspense(lazy(() => import("./pages/Signout")));
+const Login = withSuspense(lazy(() => import("./pages/Login")));
+const AdminPage = withSuspense(lazy(() => import("./pages/AdminPage")));
+const Logout = withSuspense(lazy(() => import("./pages/Logout")));
 const CompoundComponent = withSuspense(
   lazy(() => import("./pages/CompoundComponent"))
+);
+
+const ProtectedAdminPage = (
+  <ProtectedRoute allowedRoles={["admin"]}>
+    <AdminPage />
+  </ProtectedRoute>
 );
 
 function App() {
@@ -28,6 +37,7 @@ function App() {
             <Route path="/" element={<Counter />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/posts" element={<Posts />} />
+            <Route path="/todos" element={<Todos />} />
             <Route path="/traffic-light" element={<TrafficLight />} />
             <Route path="/stop-watch" element={<StopWatch />} />
             <Route path="/slider" element={<Slider />} />
@@ -35,8 +45,9 @@ function App() {
             <Route path="/pointer" element={<Pointer />} />
             <Route path="/compound-component" element={<CompoundComponent />} />
             <Route path="/typist" element={<Typist />} />
-            <Route path="/sign-in" element={<Signin />} />
-            <Route path="/sign-out" element={<Signout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/secret-page" element={ProtectedAdminPage} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

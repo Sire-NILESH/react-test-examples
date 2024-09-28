@@ -10,6 +10,7 @@ import {
 } from "../components/Page";
 import { wordBank } from "../dummyData/wordbank";
 import { cn } from "../utils/cn";
+import Input from "../components/Input";
 
 function getRandomWord() {
   return wordBank[Math.floor(Math.random() * wordBank.length - 1)];
@@ -134,7 +135,7 @@ const Typist = () => {
               )}
             >
               {/* LETTER */}
-              {word.split("").map((letter, letterIndex) => {
+              {word?.split("").map((letter, letterIndex) => {
                 const isCurrentLetter =
                   wordIndex === currentWordIndex &&
                   letterIndex === currentLetterIndex;
@@ -173,7 +174,7 @@ const Typist = () => {
         </div>
 
         <div className="max-w-lg mt-10 flex flex-col md:flex-row md:items-center gap-4">
-          <input
+          <Input
             type="text"
             value={userInput}
             onChange={handleInputChange}

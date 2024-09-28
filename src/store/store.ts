@@ -3,9 +3,11 @@ import { themeSliceReducer } from "./themeSlice";
 import { mobileNavReducer } from "./mobileNavSlice";
 import { apiSlice } from "./apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import authSliceReducer from "./authSlice";
 
 export const store = configureStore({
   reducer: {
+    auth: authSliceReducer,
     theme: themeSliceReducer,
     mobileNav: mobileNavReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
