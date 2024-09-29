@@ -47,7 +47,7 @@ function App() {
             <Route path="/typist" element={<Typist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/secret-page" element={ProtectedAdminPage} />
+            <Route path="/admin-page" element={ProtectedAdminPage} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

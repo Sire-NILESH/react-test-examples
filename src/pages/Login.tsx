@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import Button from "../components/Button";
+import Input from "../components/Input";
 import {
   Page,
   PageBody,
@@ -6,30 +9,69 @@ import {
   PageHeader,
   PageTitle,
 } from "../components/Page";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
+import useDebounceValue from "../hooks/useDebounceValue";
 import {
   authErrorSelector,
   authIsLoadingSelector,
   loginUser,
 } from "../store/authSlice";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { isValidEmail, isValidPassword } from "../utils/validators";
+
+type IsTouchedType = {
+  emailField: boolean;
+  passwordField: boolean;
+};
+
+const isTouchedInitialState: IsTouchedType = {
+  emailField: false,
+  passwordField: false,
+};
 
 const Login = () => {
+  // Redux Auth slice states
   const userIsLoading = useAppSelector(authIsLoadingSelector);
   const userError = useAppSelector(authErrorSelector);
+
   const dispatch = useAppDispatch();
 
+  // Form input fields
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [adminPrivilege, setAdminPrivilege] = useState<boolean>(false);
+
+  // Debounce the inputs
+  const { debounced: debouncedUserEmail } = useDebounceValue(userEmail);
+  const { debounced: debouncedUserPassword } = useDebounceValue(userPassword);
+
+  // Validate debounced inputs
+  const { validUserEmail, validUserPassword } = useMemo(
+    () => ({
+      validUserEmail: isValidEmail(debouncedUserEmail),
+      validUserPassword: isValidPassword(debouncedUserPassword),
+    }),
+    [debouncedUserEmail, debouncedUserPassword]
+  );
+
+  // Form Controls
+  const [isTouched, setIsTouched] = useState<IsTouchedType>(
+    isTouchedInitialState
+  );
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  // Form handling
+  const handleBlur = (field: keyof IsTouchedType) => {
+    setIsTouched((prev) => ({ ...prev, [field]: true }));
+  };
+
+  const handleShowPassowrd = () => setShowPassword((prev) => !prev);
 
   async function onSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     //  Login logic ...
-    if (userEmail && userPassword) {
+    if (userEmail && userPassword && validUserEmail && validUserPassword) {
       // a dummy user login
       await dispatch(
         loginUser({ email: userEmail, grantAdminPrivilege: adminPrivilege })
@@ -38,6 +80,7 @@ const Login = () => {
       // reset fields
       setUserEmail("");
       setUserPassword("");
+      setIsTouched(isTouchedInitialState);
     }
   }
 
@@ -60,20 +103,45 @@ const Login = () => {
               name="user-email"
               type="email"
               value={userEmail}
+              onBlur={() => handleBlur("emailField")}
               onChange={(e) => setUserEmail(e.target.value)}
+              error={
+                isTouched.emailField && !validUserEmail
+                  ? "Please enter a valid user email"
+                  : undefined
+              }
               className="mt-2"
               placeholder="email@example.com"
             />
           </div>
 
           <div className="">
-            <label htmlFor="user-password">Password</label>
+            <div className="flex items-end justify-between">
+              <label htmlFor="user-password">Password</label>
+              <Button
+                type="button"
+                onClick={handleShowPassowrd}
+                variant={"ghost"}
+              >
+                {showPassword ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeOff className="size-4" />
+                )}
+              </Button>
+            </div>
 
             <Input
               name="user-password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={userPassword}
+              onBlur={() => handleBlur("passwordField")}
               onChange={(e) => setUserPassword(e.target.value)}
+              error={
+                isTouched.passwordField && !validUserPassword
+                  ? "Password must only be 6 characters long and must atleast contain 1 uppercase, lowercase, number and a special charater (!@#$...)"
+                  : undefined
+              }
               className="mt-2"
               placeholder="******"
             />

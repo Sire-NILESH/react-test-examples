@@ -43,7 +43,7 @@ const Header = () => {
           </div>
           <div className="flex items-center">
             <ThemeToggle />
-            <button
+            {/* <button
               type="button"
               className="flex text-sm ms-3 bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             >
@@ -52,7 +52,7 @@ const Header = () => {
                 src="https://images.unsplash.com/photo-1702478492816-843fb767d0f1?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="user"
               />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

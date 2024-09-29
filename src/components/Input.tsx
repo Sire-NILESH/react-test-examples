@@ -1,19 +1,26 @@
 import { ComponentPropsWithRef, forwardRef } from "react";
 import { cn } from "../utils/cn";
 
-type Props = ComponentPropsWithRef<"input"> & {};
+type Props = ComponentPropsWithRef<"input"> & {
+  error?: string;
+};
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ className, ...props }, ref) => {
+  ({ className, error, ...props }, ref) => {
     return (
-      <input
-        ref={ref}
-        className={cn(
-          "w-full px-4 py-2 border border-border rounded-full bg-secondary",
-          className
-        )}
-        {...props}
-      />
+      <div>
+        <input
+          ref={ref}
+          className={cn(
+            "w-full px-4 py-2 border border-border rounded-full bg-secondary",
+            error && "outline outline-1 outline-red-500",
+            className
+          )}
+          {...props}
+        />
+
+        {<span className="!text-red-500 text-sm">{error}</span>}
+      </div>
     );
   }
 );

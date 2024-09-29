@@ -82,7 +82,7 @@ export const sidebarItems = [
   },
   {
     name: "Admin Page",
-    href: "/secret-page",
+    href: "/admin-page",
     icon: ({ className }: IconProps) => <Cog className={cn(className)} />,
   },
   {
