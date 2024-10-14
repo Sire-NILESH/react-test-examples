@@ -12,6 +12,7 @@ import {
   Keyboard,
   ListTodo,
   Cog,
+  NotepadText,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -69,6 +70,13 @@ export const sidebarItems = [
     name: "Pointer",
     href: "/pointer",
     icon: ({ className }: IconProps) => <Pointer className={cn(className)} />,
+  },
+  {
+    name: "Notes",
+    href: "/notes",
+    icon: ({ className }: IconProps) => (
+      <NotepadText className={cn(className)} />
+    ),
   },
   {
     name: "Compound Component",

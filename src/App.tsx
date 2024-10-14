@@ -9,6 +9,7 @@ const Posts = withSuspense(lazy(() => import("./pages/Posts")));
 const Todos = withSuspense(lazy(() => import("./pages/Todos")));
 const Counter = withSuspense(lazy(() => import("./pages/Counter")));
 const Pointer = withSuspense(lazy(() => import("./pages/Pointer")));
+const Notes = withSuspense(lazy(() => import("./pages/Notes")));
 const TrafficLight = withSuspense(lazy(() => import("./pages/TrafficLight")));
 const Slider = withSuspense(lazy(() => import("./pages/Slider")));
 const FileTree = withSuspense(lazy(() => import("./pages/FileTree")));
@@ -43,6 +44,7 @@ function App() {
             <Route path="/slider" element={<Slider />} />
             <Route path="/file-tree" element={<FileTree />} />
             <Route path="/pointer" element={<Pointer />} />
+            <Route path="/notes" element={<Notes />} />
             <Route path="/compound-component" element={<CompoundComponent />} />
             <Route path="/typist" element={<Typist />} />
             <Route path="/login" element={<Login />} />
