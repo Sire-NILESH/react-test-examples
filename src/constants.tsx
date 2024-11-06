@@ -13,6 +13,7 @@ import {
   ListTodo,
   Cog,
   NotepadText,
+  Hand,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -77,6 +78,11 @@ export const sidebarItems = [
     icon: ({ className }: IconProps) => (
       <NotepadText className={cn(className)} />
     ),
+  },
+  {
+    name: "Drag-n-Drop",
+    href: "/drag-n-drop",
+    icon: ({ className }: IconProps) => <Hand className={cn(className)} />,
   },
   {
     name: "Compound Component",
