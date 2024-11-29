@@ -15,6 +15,7 @@ export default function Column({ column, tasks }: ColumnProps) {
   });
 
   const style: CSSProperties = {
+    border: isOver ? "2px solid" : undefined,
     borderColor: isOver ? "var(--primary)" : undefined,
   };
 
