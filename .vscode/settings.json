@@ -1,0 +1,11 @@
+{
+  // fix to allow tailwind intellisense to work properly in 'cva' library
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "css": "css"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
