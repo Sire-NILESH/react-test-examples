@@ -14,6 +14,7 @@ import {
   Cog,
   NotepadText,
   Hand,
+  ListCollapse,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -88,6 +89,13 @@ export const sidebarItems = [
     name: "Compound Component",
     href: "/compound-component",
     icon: ({ className }: IconProps) => <Atom className={cn(className)} />,
+  },
+  {
+    name: "Accordian in js",
+    href: "/accordian-in-js",
+    icon: ({ className }: IconProps) => (
+      <ListCollapse className={cn(className)} />
+    ),
   },
   {
     name: "Typist",

@@ -1,0 +1,55 @@
+.accordian__container {
+  margin: 0px auto;
+  width: 40rem;
+  border: 1px solid gray;
+  border-radius: 0.2rem;
+  padding: 1rem 2rem;
+}
+
+.accordian__item {
+  margin: 3rem 0rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 24px;
+  row-gap: 16px;
+  align-items: center;
+}
+
+.accordian__header {
+  margin: 0.5rem 0rem;
+  /* display: flex;
+  justify-content: space-between;
+  gap: 1rem; */
+}
+
+.accordian__header__number,
+.accordian__header__title {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.accordian__header__number {
+  /* margin-right: 1rem; */
+}
+
+.accordian__header__title {
+}
+
+.accordian__header__icon {
+}
+
+.accordian__content {
+  grid-column: 2;
+  /* padding: 0rem 0.6rem; */
+}
+
+.accordian__content__description {
+  margin-bottom: 1rem;
+}
+
+.accordian_content__points {
+  list-style: disc;
+}
+
+.accordian__content__point {
+}

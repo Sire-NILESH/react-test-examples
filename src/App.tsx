@@ -17,6 +17,7 @@ const FileTree = withSuspense(lazy(() => import("./pages/FileTree")));
 const StopWatch = withSuspense(lazy(() => import("./pages/StopWatch")));
 const NotFound = withSuspense(lazy(() => import("./pages/NotFound")));
 const Typist = withSuspense(lazy(() => import("./pages/Typist")));
+const AccordianPage = withSuspense(lazy(() => import("./pages/AccordianPage")));
 const Login = withSuspense(lazy(() => import("./pages/Login")));
 const AdminPage = withSuspense(lazy(() => import("./pages/AdminPage")));
 const Logout = withSuspense(lazy(() => import("./pages/Logout")));
@@ -48,6 +49,7 @@ function App() {
             <Route path="/notes" element={<Notes />} />
             <Route path="/drag-n-drop" element={<DragNDrop />} />
             <Route path="/compound-component" element={<CompoundComponent />} />
+            <Route path="/accordian-in-js" element={<AccordianPage />} />
             <Route path="/typist" element={<Typist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
