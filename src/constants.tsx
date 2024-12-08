@@ -91,8 +91,8 @@ export const sidebarItems = [
     icon: ({ className }: IconProps) => <Atom className={cn(className)} />,
   },
   {
-    name: "Accordian in js",
-    href: "/accordian-in-js",
+    name: "Accordian",
+    href: "/accordian-page",
     icon: ({ className }: IconProps) => (
       <ListCollapse className={cn(className)} />
     ),

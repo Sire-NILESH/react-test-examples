@@ -21,7 +21,7 @@ const Header = () => {
               aria-controls="logo-sidebar"
               type="button"
               onClick={toggleMobileNavHandler}
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             >
               <span className="sr-only">Open sidebar</span>
               <svg
@@ -43,16 +43,6 @@ const Header = () => {
           </div>
           <div className="flex items-center">
             <ThemeToggle />
-            {/* <button
-              type="button"
-              className="flex text-sm ms-3 bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            >
-              <img
-                className="w-8 h-8 rounded-full"
-                src="https://images.unsplash.com/photo-1702478492816-843fb767d0f1?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="user"
-              />
-            </button> */}
           </div>
         </div>
       </div>

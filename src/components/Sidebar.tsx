@@ -15,7 +15,7 @@ const Sidebar = ({
   return (
     <aside
       className={cn(
-        "flex flex-col fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-card border-r sm:translate-x-0 dark:border-gray-700",
+        "flex flex-col fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-card border-r md:translate-x-0 dark:border-gray-700",
         className,
         !status ? "-translate-x-full" : ""
       )}

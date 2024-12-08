@@ -49,7 +49,7 @@ function App() {
             <Route path="/notes" element={<Notes />} />
             <Route path="/drag-n-drop" element={<DragNDrop />} />
             <Route path="/compound-component" element={<CompoundComponent />} />
-            <Route path="/accordian-in-js" element={<AccordianPage />} />
+            <Route path="/accordian-page" element={<AccordianPage />} />
             <Route path="/typist" element={<Typist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />

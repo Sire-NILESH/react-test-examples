@@ -9,7 +9,7 @@ import Accordian, {
   AccordianItemType,
 } from "../components/accordian/Accordian";
 
-const accordianItems: AccordianItemType[] = [
+const accordianItemsData: AccordianItemType[] = [
   {
     id: 1,
     title: "Where are these chairs assembled?",
@@ -98,14 +98,11 @@ const Pointer = () => {
     <Page>
       <PageHeader>
         <PageTitle>Accordian in JS</PageTitle>
-        <PageDescription>
-          A simple accordian component made compleltely in JS/TS only without
-          react.
-        </PageDescription>
+        <PageDescription>A simple accordian component.</PageDescription>
       </PageHeader>
 
       <PageBody>
-        <Accordian items={accordianItems} />
+        <Accordian items={accordianItemsData} />
       </PageBody>
     </Page>
   );
