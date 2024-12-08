@@ -1,31 +1,27 @@
 .accordian__container {
   margin: 0px auto;
-  width: 40rem;
-  border: 1px solid gray;
-  border-radius: 0.2rem;
-  padding: 1rem 2rem;
+  max-width: theme(maxWidth.2xl);
+  border: theme(borderWidth.DEFAULT) solid theme(colors.border);
+  border-radius: theme(borderRadius.md);
+  padding: 0 theme(padding.6);
 }
 
 .accordian__item {
-  margin: 3rem 0rem;
+  margin: theme(margin.10) 0rem;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  column-gap: 24px;
-  row-gap: 16px;
+  column-gap: theme(gap.6);
+  row-gap: theme(gap.4);
   align-items: center;
 }
 
 .accordian__header {
-  margin: 0.5rem 0rem;
-  /* display: flex;
-  justify-content: space-between;
-  gap: 1rem; */
+  /* margin: 0.5rem 0rem; */
 }
 
 .accordian__header__number,
 .accordian__header__title {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: theme(fontSize.2xl);
 }
 
 .accordian__header__number {
@@ -35,12 +31,22 @@
 .accordian__header__title {
 }
 
+.accordian__header_control {
+  border-radius: 999%;
+  background-color: theme(colors.secondary.DEFAULT);
+  padding: theme("spacing.2");
+}
+
+.accordian__header_control:hover {
+  /* background-color: theme(colors.primary.DEFAULT); */
+}
+
 .accordian__header__icon {
 }
 
 .accordian__content {
   grid-column: 2;
-  /* padding: 0rem 0.6rem; */
+  display: none;
 }
 
 .accordian__content__description {
@@ -48,8 +54,19 @@
 }
 
 .accordian_content__points {
+  margin-left: theme(margin.5);
   list-style: disc;
+
+  display: flex;
+  flex-direction: column;
+  gap: theme(gap.3);
+
+  color: theme(textColor.muted.foreground);
 }
 
 .accordian__content__point {
+}
+
+.open .accordian__content {
+  display: block;
 }

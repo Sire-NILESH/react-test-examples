@@ -5,9 +5,11 @@ import {
   PageHeader,
   PageTitle,
 } from "../components/Page";
-import Accordian, { AccordianItem } from "../components/accordian/Accordian";
+import Accordian, {
+  AccordianItemType,
+} from "../components/accordian/Accordian";
 
-const accordianItems: AccordianItem[] = [
+const accordianItems: AccordianItemType[] = [
   {
     id: 1,
     title: "Where are these chairs assembled?",
