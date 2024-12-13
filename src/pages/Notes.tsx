@@ -61,7 +61,7 @@ const NoteContainer = ({
   return (
     <div
       className={cn(
-        "relative h-[32rem] border-2 border-dashed border-border rounded-md",
+        "h-[32rem] border-2 border-dashed border-border rounded-md",
         className
       )}
       ref={containerRef}
@@ -111,7 +111,7 @@ const Note = ({ className, ...props }: NoteProps) => {
       const noteHeight = noteRef.current.getBoundingClientRect().height;
 
       // position of 'note' relative to 'container'
-      // because note is placed with CSS absolute positioning relative to 'container'
+      // because note is placed within 'container'
       let newX = e.clientX - (containerRect.left + offset.x);
       let newY = e.clientY - (containerRect.top + offset.y);
 
@@ -149,17 +149,15 @@ const Note = ({ className, ...props }: NoteProps) => {
     };
   }, [handleMouseMove, handleMouseUp, isDragging]);
 
+  const toTranslate = `${position.x}px ${position.y}px`;
+
   return (
     <div
-      className={cn(
-        "absolute w-60 h-32 rounded-sm bg-yellow-400 p-3",
-        className
-      )}
+      className={cn("w-60 h-32 rounded-sm bg-yellow-400 p-3", className)}
       ref={noteRef}
       onMouseDown={handleMouseDown}
       style={{
-        left: position.x,
-        top: position.y,
+        translate: toTranslate,
         cursor: isDragging ? "grabbing" : "grab",
       }}
       {...props}
