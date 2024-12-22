@@ -15,6 +15,7 @@ import {
   NotepadText,
   Hand,
   ListCollapse,
+  Upload,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -101,6 +102,11 @@ export const sidebarItems = [
     name: "Typist",
     href: "/typist",
     icon: ({ className }: IconProps) => <Keyboard className={cn(className)} />,
+  },
+  {
+    name: "File uploader",
+    href: "/file-uploader",
+    icon: ({ className }: IconProps) => <Upload className={cn(className)} />,
   },
   {
     name: "Admin Page",

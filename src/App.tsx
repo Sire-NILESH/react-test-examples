@@ -17,6 +17,9 @@ const FileTree = withSuspense(lazy(() => import("./pages/FileTree")));
 const StopWatch = withSuspense(lazy(() => import("./pages/StopWatch")));
 const NotFound = withSuspense(lazy(() => import("./pages/NotFound")));
 const Typist = withSuspense(lazy(() => import("./pages/Typist")));
+const FileUploader = withSuspense(
+  lazy(() => import("./pages/FileUploaderPage"))
+);
 const AccordianPage = withSuspense(lazy(() => import("./pages/AccordianPage")));
 const Login = withSuspense(lazy(() => import("./pages/Login")));
 const AdminPage = withSuspense(lazy(() => import("./pages/AdminPage")));
@@ -51,6 +54,7 @@ function App() {
             <Route path="/compound-component" element={<CompoundComponent />} />
             <Route path="/accordian-page" element={<AccordianPage />} />
             <Route path="/typist" element={<Typist />} />
+            <Route path="/file-uploader" element={<FileUploader />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/admin-page" element={ProtectedAdminPage} />
