@@ -1,24 +1,29 @@
-import { Upload } from "lucide-react";
-import { forwardRef } from "react";
+import { ComponentPropsWithRef, forwardRef } from "react";
 import { cn } from "../../utils/cn";
 import Button from "../Button";
+import { Upload } from "lucide-react";
 import RadialProgress from "../RadialProgress";
 import { useFileUploader } from "./hooks/useFileUploader";
+import { formatFileSize } from "../../utils/helpers";
 
-type FileUploaderProps = {
+type FileUploaderProps = ComponentPropsWithRef<"div"> & {
   url: string;
   className?: string;
+  fileType?: string; // Optional file type restriction (e.g., "image/png")
+  fileSizeLimit?: number; // Optional file size limit in bytes
 };
 
 const FileUploader = forwardRef<HTMLDivElement, FileUploaderProps>(
-  ({ url, className }, ref) => {
+  ({ url, className, fileType, fileSizeLimit, ...props }, ref) => {
     const {
       file,
       fileUploadStatus,
       fileUploadProgress,
+      errorMessages,
+      // resetFileUploader,
       uploadFile,
       handleFileChange,
-    } = useFileUploader(url);
+    } = useFileUploader(url, fileType, fileSizeLimit);
 
     return (
       <>
@@ -28,17 +33,21 @@ const FileUploader = forwardRef<HTMLDivElement, FileUploaderProps>(
             className
           )}
           ref={ref}
+          {...props}
         >
           <input
             type="file"
             onChange={handleFileChange}
-            className="w-full text-sm transition-colors p-1 file:inline-block file:w-24 file:my-1 file:mr-2 file:p-1 file:border-0 file:ring-1 active:file:scale-95 file:text-primary file:bg-transparent hover:file:bg-primary hover:file:text-primary-foreground file:text-sm file:font-medium file:rounded-full  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            accept={fileType}
+            className="w-full text-sm transition-colors p-1 file:inline-block file:w-24 file:my-1 file:mr-2 file:p-1 file:border-0 file:ring-1 active:file:scale-95 file:text-primary file:bg-transparent hover:file:bg-primary hover:file:text-primary-foreground file:text-sm file:font-medium file:rounded-full placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           />
 
           <Button
             type={"button"}
             variant={"outline"}
-            disabled={fileUploadStatus === "uploading"}
+            disabled={
+              fileUploadStatus === "uploading" || errorMessages.length > 0
+            }
             onClick={uploadFile}
           >
             {fileUploadStatus === "uploading" ? (
@@ -52,27 +61,43 @@ const FileUploader = forwardRef<HTMLDivElement, FileUploaderProps>(
           </Button>
         </div>
 
-        {file && (
-          <div className="mt-2 ml-3 flex flex-wrap gap-4">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-bold">Type : </span>
-              {file.type}
-            </p>
+        <div className="mt-2 max-w-2xl px-3">
+          {file && (
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-bold">Type : </span>
+                  {file.type}
+                </p>
 
-            <p className="text-sm text-muted-foreground">
-              <span className="font-bold">Size : </span>
-              {(file.size / 1024).toFixed(2)} KB
-            </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-bold">Size : </span>
+                  {formatFileSize(file.size)}
+                </p>
+              </>
 
-            {fileUploadStatus === "error" ? (
-              <p className="text-sm text-red-500 font-bold">Error uploading</p>
-            ) : fileUploadStatus === "success" ? (
-              <p className="text-sm text-green-600 font-bold">
-                Uploaded successfully
-              </p>
-            ) : null}
-          </div>
-        )}
+              <div className="flex-col">
+                {errorMessages.map((message, index) => (
+                  <p key={index} className="text-sm text-red-500 font-bold">
+                    {message}
+                  </p>
+                ))}
+              </div>
+
+              {fileUploadStatus === "error" && (
+                <p className="text-sm text-red-500 font-bold">
+                  Error uploading file
+                </p>
+              )}
+
+              {fileUploadStatus === "success" && (
+                <p className="text-sm text-green-600 font-bold">
+                  Uploaded successfully
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </>
     );
   }

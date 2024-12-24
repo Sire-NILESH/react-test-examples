@@ -1,13 +1,19 @@
 import { useState, useRef } from "react";
 import axios from "axios";
+import { formatFileSize } from "../../../utils/helpers";
 
-export type FileUploadStatus = "idle" | "uploading" | "error" | "success";
+type FileUploadStatus = "idle" | "uploading" | "error" | "success";
 
-export function useFileUploader(url: string) {
+export function useFileUploader(
+  url: string,
+  fileType?: string, // Comma-separated string of valid MIME types
+  fileSizeLimit: number = 2 * 1024 * 1024 // Default to 2 MB
+) {
   const [file, setFile] = useState<null | File>(null);
   const [fileUploadStatus, setFileUploadStatus] =
     useState<FileUploadStatus>("idle");
   const [fileUploadProgress, setFileUploadProgress] = useState(0);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   const fileUploadReqRef = useRef<AbortController | null>(null);
 
@@ -15,8 +21,34 @@ export function useFileUploader(url: string) {
     setFile(null);
     setFileUploadStatus("idle");
     setFileUploadProgress(0);
+    setErrorMessages([]);
     fileUploadReqRef.current?.abort();
     fileUploadReqRef.current = null;
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    resetFileUploader();
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    const errors: string[] = [];
+
+    if (fileType) {
+      const allowedTypes = fileType.split(",").map((type) => type.trim());
+      if (!allowedTypes.includes(selectedFile.type)) {
+        errors.push(`File type must be one of: ${fileType}`);
+      }
+    }
+
+    if (selectedFile.size > fileSizeLimit) {
+      errors.push(`File size must not exceed ${formatFileSize(fileSizeLimit)}`);
+    }
+
+    if (errors.length > 0) {
+      setErrorMessages(errors);
+    }
+
+    setFile(selectedFile);
   }
 
   async function uploadFile() {
@@ -57,17 +89,11 @@ export function useFileUploader(url: string) {
     }
   }
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    resetFileUploader();
-    if (e.target.files && e.target.files?.length > 0) {
-      setFile(e.target.files[0]);
-    }
-  }
-
   return {
     file,
     fileUploadStatus,
     fileUploadProgress,
+    errorMessages,
     resetFileUploader,
     uploadFile,
     handleFileChange,
