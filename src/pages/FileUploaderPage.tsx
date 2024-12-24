@@ -19,7 +19,12 @@ const FileUploaderPage = () => {
       </PageHeader>
 
       <PageBody>
-        <FileUploader url={"https://httpbin.org/post"} />
+        <FileUploader
+          url={"https://httpbin.org/post"}
+          fileType="image/png, image/jpeg, image/jpg"
+          fileSizeLimit={1 * 1024 * 1024} // 1 MB
+          className="my-custom-class"
+        />
       </PageBody>
     </Page>
   );
