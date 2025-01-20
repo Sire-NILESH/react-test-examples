@@ -135,17 +135,23 @@ const Note = ({ className, ...props }: NoteProps) => {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     if (isDragging) {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mousemove", handleMouseMove, {
+        signal: controller.signal,
+      });
+      window.addEventListener("mouseup", handleMouseUp, {
+        signal: controller.signal,
+      });
     } else {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      // cancel/remove all the event listeners
+      controller.abort();
     }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      // cancel/remove all the event listeners
+      controller.abort();
     };
   }, [handleMouseMove, handleMouseUp, isDragging]);
 

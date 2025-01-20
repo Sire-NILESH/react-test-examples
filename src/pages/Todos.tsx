@@ -108,6 +108,6 @@ export default Todos;
 
 interface Props extends ComponentProps<"article"> {}
 
-const TodoCard = ({ className, ...props }: Props) => {
+export const TodoCard = ({ className, ...props }: Props) => {
   return <article className={cn("", className)} {...props} />;
 };
