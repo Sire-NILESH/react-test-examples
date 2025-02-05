@@ -1,4 +1,5 @@
-import { lazy } from "react";
+import { scan } from "react-scan";
+import React, { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import DashboardLayout from "./components/DashboardLayout";
@@ -7,7 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 const Posts = withSuspense(lazy(() => import("./pages/Posts")));
 const Todos = withSuspense(lazy(() => import("./pages/Todos")));
-const Counter = withSuspense(lazy(() => import("./pages/Counter")));
+const CounterPage = withSuspense(lazy(() => import("./pages/CounterPage")));
 const Pointer = withSuspense(lazy(() => import("./pages/Pointer")));
 const Notes = withSuspense(lazy(() => import("./pages/Notes")));
 const DragNDrop = withSuspense(lazy(() => import("./pages/DragNDrop")));
@@ -34,14 +35,22 @@ const ProtectedAdminPage = (
   </ProtectedRoute>
 );
 
+// React-Scan tool configuration
+if (typeof window !== "undefined") {
+  scan({
+    enabled: true,
+    log: false, // logs render info to console (default: false)
+  });
+}
+
 function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <BrowserRouter>
         <Routes>
           <Route element={<DashboardLayout />}>
-            <Route path="/" element={<Counter />} />
-            <Route path="/counter" element={<Counter />} />
+            <Route path="/" element={<CounterPage />} />
+            <Route path="/counter" element={<CounterPage />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/todos" element={<Todos />} />
             <Route path="/traffic-light" element={<TrafficLight />} />

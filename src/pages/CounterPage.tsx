@@ -8,10 +8,7 @@ import {
 } from "../components/Page";
 import { cn } from "../utils/cn";
 
-const Counter = () => {
-  const [counter, setCounter] = React.useState(0);
-  // solving the unnecessary re-rendering by memoising the function that will be passed to the child component
-  const fn = React.useCallback(() => {}, []);
+const CounterPage = () => {
   return (
     <Page>
       <PageHeader>
@@ -24,32 +21,43 @@ const Counter = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="flex items-center space-x-4">
-          <p className="border-b border-border px-2 py-1">Counter {counter}</p>
-          <button
-            className="bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded-sm"
-            onClick={() => setCounter((prev) => prev + 1)}
-          >
-            Counter +
-          </button>
-        </div>
-
-        {/* this child compo takes a function as prop that will cause it to re render even if the component is memoised */}
-        <DemoChildComponent className="mt-10" demoFn={fn} />
+        <Counter />
       </PageBody>
     </Page>
   );
 };
 
-export default Counter;
+export default CounterPage;
+
+const Counter = () => {
+  const [counter, setCounter] = React.useState(0);
+  // solving the unnecessary re-rendering by memoising the function that will be passed to the child component
+  const fn = React.useCallback(() => {}, []);
+  return (
+    <>
+      <div className="flex items-center space-x-4">
+        <p className="border-b border-border px-2 py-1">Counter {counter}</p>
+        <button
+          className="bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded-sm"
+          onClick={() => setCounter((prev) => prev + 1)}
+        >
+          Counter +
+        </button>
+      </div>
+
+      {/* this child compo takes a function as prop that will cause it to re render even if the component is memoised */}
+      <DemoChildComponent className="mt-10" noUsedemoFn={fn} />
+    </>
+  );
+};
 
 interface DemoChildComponentProps extends ComponentProps<"div"> {
-  demoFn: () => void;
+  noUsedemoFn: () => void;
 }
 
 // To optimize performance, memoize the child component and also the 'demoFn' function prop that it receives.
 const DemoChildComponent = React.memo(
-  ({ demoFn, className, ...props }: DemoChildComponentProps) => {
+  ({ noUsedemoFn, className, ...props }: DemoChildComponentProps) => {
     const [counter, setCounter] = React.useState(0);
 
     React.useEffect(() => {
