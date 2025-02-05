@@ -159,7 +159,10 @@ const Note = ({ className, ...props }: NoteProps) => {
 
   return (
     <div
-      className={cn("w-60 h-32 rounded-sm bg-yellow-400 p-3", className)}
+      className={cn(
+        "w-60 h-32 rounded-sm bg-yellow-500 p-3 shadow-lg",
+        className
+      )}
       ref={noteRef}
       onMouseDown={handleMouseDown}
       style={{
