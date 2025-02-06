@@ -16,6 +16,7 @@ import {
   Hand,
   ListCollapse,
   Upload,
+  ShoppingBag,
 } from "lucide-react";
 import { cn } from "./utils/cn";
 
@@ -42,6 +43,13 @@ export const sidebarItems = [
     name: "Todos",
     href: "/todos",
     icon: ({ className }: IconProps) => <ListTodo className={cn(className)} />,
+  },
+  {
+    name: "Products",
+    href: "/products",
+    icon: ({ className }: IconProps) => (
+      <ShoppingBag className={cn(className)} />
+    ),
   },
   {
     name: "Traffic Light",
