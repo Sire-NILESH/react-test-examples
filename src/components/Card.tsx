@@ -26,7 +26,7 @@ const CardCtx = createContext<{ cardData: CardData }>({
 const Card = ({ className, cardData, children, ...props }: CardProps) => {
   return (
     <CardCtx.Provider value={{ cardData }}>
-      <figure
+      <article
         className={cn(
           "max-w-96 w-full rounded-md bg-card text-card-foreground p-4 space-y-3 overflow-hidden",
           className
@@ -34,7 +34,7 @@ const Card = ({ className, cardData, children, ...props }: CardProps) => {
         {...props}
       >
         {children}
-      </figure>
+      </article>
     </CardCtx.Provider>
   );
 };
@@ -52,16 +52,18 @@ const CardTitle = ({ className, ...props }: CardTitleProps) => {
   );
 };
 
-interface CardImgProps extends ComponentProps<"img"> {}
+interface CardImgProps extends ComponentProps<"div"> {
+  imgClassName?: ComponentProps<"img">["className"];
+}
 
-const CardImage = ({ className, ...props }: CardImgProps) => {
+const CardImage = ({ className, imgClassName, ...props }: CardImgProps) => {
   const {
     cardData: { title, cardImgURL },
   } = useContext(CardCtx);
   return (
     <div className={cn("w-full aspect-video", className)} {...props}>
       <img
-        className="h-full w-full object-cover"
+        className={cn("h-full w-full object-contain", imgClassName)}
         src={cardImgURL}
         alt={title}
       />
@@ -76,9 +78,9 @@ const CardContent = ({ className, ...props }: CardContentProps) => {
     cardData: { content },
   } = useContext(CardCtx);
   return (
-    <div className={cn("", className)} {...props}>
-      <p className="text-base">{content}</p>
-    </div>
+    <p className={cn("text-base", className)} {...props}>
+      {content}
+    </p>
   );
 };
 

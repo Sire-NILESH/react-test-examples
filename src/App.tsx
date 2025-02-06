@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 const Posts = withSuspense(lazy(() => import("./pages/Posts")));
 const Todos = withSuspense(lazy(() => import("./pages/Todos")));
+const ProductsPage = withSuspense(lazy(() => import("./pages/ProductsPage")));
 const CounterPage = withSuspense(lazy(() => import("./pages/CounterPage")));
 const Pointer = withSuspense(lazy(() => import("./pages/Pointer")));
 const Notes = withSuspense(lazy(() => import("./pages/Notes")));
@@ -53,6 +54,7 @@ function App() {
             <Route path="/counter" element={<CounterPage />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/todos" element={<Todos />} />
+            <Route path="/products" element={<ProductsPage />} />
             <Route path="/traffic-light" element={<TrafficLight />} />
             <Route path="/stop-watch" element={<StopWatch />} />
             <Route path="/slider" element={<Slider />} />
