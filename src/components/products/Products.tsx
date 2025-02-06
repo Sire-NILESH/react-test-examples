@@ -1,12 +1,14 @@
-import { Star } from "lucide-react";
-import Card from "../Card";
+import { useState } from "react";
 import ErrorComponent from "../ErrorComponent";
 import Loading from "../Loading";
+import Pagination from "../pagination/Pagination";
 import useProducts from "./hooks/useProducts";
+import ProductCard from "./ProductsCard";
 import { Product } from "./types";
 
 const Products = () => {
-  const { data: products, status } = useProducts(9);
+  const { data: products, status } = useProducts(100);
+  const [pageProducts, setPageProducts] = useState<Product[]>([]);
 
   if (status === "pending") {
     return (
@@ -27,53 +29,21 @@ const Products = () => {
   return (
     <div>
       <ul className="mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
-        {products?.map((product) => (
+        {pageProducts?.map((product) => (
           <li key={product.id}>
-            <ProductCard product={product} />
+            <ProductCard product={product} className="h-full" />
           </li>
         ))}
       </ul>
+
+      <div className="my-10 flex justify-center">
+        <Pagination
+          allItems={products ? products : []}
+          currentPageItemsHandler={setPageProducts}
+        />
+      </div>
     </div>
   );
 };
 
 export default Products;
-
-type ProductCardProps = {
-  product: Product;
-};
-
-const ProductCard = ({ product }: ProductCardProps) => {
-  return (
-    <Card
-      cardData={{
-        cardId: String(product.id),
-        title: product.title,
-        cardImgURL: product.thumbnail,
-        content: product.description,
-        footerContent: product.shippingInformation,
-      }}
-      className="min-[19rem] border border-border"
-    >
-      <Card.Title />
-      <Card.Image className="rounded-md bg-secondary dark:bg-background overflow-hidden border border-border object-center" />
-
-      <div className="flex space-x-2 items-center">
-        <p className="text-lg font-bold">${product.price}</p>
-
-        <p className="text-muted-foreground">{"•"}</p>
-
-        {/* Rating/Review */}
-        <div className="flex items-center space-x-2">
-          <Star className="size-4 text-yellow-500 fill-yellow-500" />{" "}
-          <p className="font-semibold">{product.rating}</p>
-        </div>
-      </div>
-      <p className="text-muted-foreground text-sm">
-        {product.availabilityStatus}
-      </p>
-      <Card.Content className="line-clamp-3" />
-      <Card.Footer />
-    </Card>
-  );
-};
