@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type PaginationResult = {
   currentPage: number;
@@ -11,7 +11,7 @@ type PaginationResult = {
 function usePagination<T>(
   items: T[],
   pageSize: number,
-  currentPageItemsHandler: React.Dispatch<React.SetStateAction<T[]>>,
+  currentPageItemsHandler: (productsOnPage: T[]) => void,
   initialPage: number = 1
 ): PaginationResult {
   // Sanitize input parameters and initialize state

@@ -6,7 +6,7 @@ import usePagination from "./hooks/usePagination";
 
 type PaginationProps<T> = ComponentProps<"nav"> & {
   allItems: T[];
-  currentPageItemsHandler: React.Dispatch<React.SetStateAction<T[]>>;
+  currentPageItemsHandler: (productsOnPage: T[]) => void;
   pageSize?: number;
   initialPage?: number;
 };

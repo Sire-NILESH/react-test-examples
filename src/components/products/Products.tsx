@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ErrorComponent from "../ErrorComponent";
 import Loading from "../Loading";
 import Pagination from "../pagination/Pagination";
@@ -9,6 +9,10 @@ import { Product } from "./types";
 const Products = () => {
   const { data: products, status } = useProducts(100);
   const [pageProducts, setPageProducts] = useState<Product[]>([]);
+
+  const currentPageItemsHandler = useCallback((productsOnPage: Product[]) => {
+    setPageProducts(productsOnPage);
+  }, []);
 
   if (status === "pending") {
     return (
@@ -39,7 +43,7 @@ const Products = () => {
       <div className="my-10 flex justify-center">
         <Pagination
           allItems={products ? products : []}
-          currentPageItemsHandler={setPageProducts}
+          currentPageItemsHandler={currentPageItemsHandler}
         />
       </div>
     </div>
