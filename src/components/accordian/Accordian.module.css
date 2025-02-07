@@ -11,8 +11,8 @@
   row-gap: theme(gap.4);
   align-items: center;
 
-  border: theme(borderWidth.DEFAULT) solid theme(colors.border);
-  border-radius: theme(borderRadius.md);
+  border: theme(borderWidth[DEFAULT]) solid theme(colors[border]);
+  border-radius: theme(borderRadius[md]);
   padding: theme(padding.4);
 
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
@@ -20,18 +20,18 @@
 
 .accordian__header__number,
 .accordian__header__title {
-  font-size: theme(fontSize.lg);
-  font-weight: theme(fontWeight.semibold);
+  font-size: theme(fontSize[lg]);
+  font-weight: theme(fontWeight[semibold]);
 }
 
 .accordian__header__number {
-  color: theme(colors.muted.foreground);
+  color: theme(colors[muted][foreground]);
 }
 
 .accordian__header_control {
   border-radius: 999%;
-  background-color: theme(colors.secondary.DEFAULT);
-  padding: theme("spacing.2");
+  background-color: theme(colors[secondary][DEFAULT]);
+  padding: theme(spacing.2);
 }
 
 .accordian__content {
@@ -51,7 +51,7 @@
   flex-direction: column;
   gap: theme(gap.3);
 
-  color: theme(textColor.muted.foreground);
+  color: theme(textColor[muted][foreground]);
 }
 
 .open .accordian__content {
@@ -59,31 +59,31 @@
 }
 
 .open .accordian__header__title {
-  color: theme(colors.primary.DEFAULT);
+  color: theme(colors[primary][DEFAULT]);
 }
 
 .open .accordian__header__number {
-  color: theme(colors.primary.DEFAULT);
+  color: theme(colors[primary][DEFAULT]);
 }
 
 .open .accordian__header__icon {
-  color: theme(colors.primary.DEFAULT);
+  color: theme(colors[primary][DEFAULT]);
   transform: rotate(0.5turn);
 }
 
-@media screen(sm) {
+@media (min-width: 640px) {
   .accordian__header__number,
   .accordian__header__title {
-    font-size: theme(fontSize.xl);
-    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize[xl]);
+    font-weight: theme(fontWeight[semibold]);
   }
 }
 
 @media screen(lg) {
   .accordian__header__number,
   .accordian__header__title {
-    font-size: theme(fontSize.2xl);
-    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize[2xl]);
+    font-weight: theme(fontWeight[semibold]);
   }
 
   .accordian__item {
