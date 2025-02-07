@@ -75,3 +75,9 @@ code {
   margin-top: 20px;
   font-size: 18px;
 }
+
+/* scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(151, 151, 151) theme(colors[background]);
+}
