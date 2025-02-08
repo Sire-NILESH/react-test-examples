@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 type PaginationResult = {
   currentPage: number;
@@ -14,13 +15,16 @@ function usePagination<T>(
   currentPageItemsHandler: (productsOnPage: T[]) => void,
   initialPage: number = 1
 ): PaginationResult {
-  // Sanitize input parameters and initialize state
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageParms = searchParams.get("page");
+  const initialPageFromURL = pageParms ? parseInt(pageParms, 10) : initialPage;
+
   const [currentPage, setCurrentPage] = useState(() => {
     const sanitizedPageSize = Math.max(1, pageSize);
     const totalPages = Math.ceil(items.length / sanitizedPageSize);
 
     if (totalPages === 0) return 0;
-    return Math.min(Math.max(1, initialPage), totalPages);
+    return Math.min(Math.max(1, initialPageFromURL), totalPages);
   });
 
   // Calculate derived values
@@ -43,23 +47,40 @@ function usePagination<T>(
     });
   }, [totalPages, items, sanitizedPageSize]);
 
+  // update url page param
+  const updateURLPageParam = useCallback(
+    (page: number) => {
+      const newpageParams = new URLSearchParams(searchParams);
+      newpageParams.set("page", page.toString());
+      setSearchParams(newpageParams);
+    },
+    [searchParams, setSearchParams]
+  );
+
   // Navigation handlers
   const nextPage = useCallback(() => {
-    setCurrentPage((current) =>
-      current >= totalPages ? current : current + 1
-    );
-  }, [totalPages]);
+    setCurrentPage((current) => {
+      const newPage = current >= totalPages ? current : current + 1;
+      updateURLPageParam(newPage);
+      return newPage;
+    });
+  }, [totalPages, updateURLPageParam]);
 
   const prevPage = useCallback(() => {
-    setCurrentPage((current) => (current <= 1 ? current : current - 1));
-  }, []);
+    setCurrentPage((current) => {
+      const newPage = current <= 1 ? current : current - 1;
+      updateURLPageParam(newPage);
+      return newPage;
+    });
+  }, [updateURLPageParam]);
 
   const jumpToPage = useCallback(
     (page: number) => {
       const newPage = Math.max(1, Math.min(page, totalPages));
+      updateURLPageParam(newPage);
       setCurrentPage(totalPages === 0 ? 0 : newPage);
     },
-    [totalPages]
+    [updateURLPageParam, totalPages]
   );
 
   useEffect(() => {
